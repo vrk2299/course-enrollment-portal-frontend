@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>GreatLearn | Admin Dashboard</title>
+  <link rel="stylesheet" href="/admin.css">
+  <script src="/admin.js" defer></script>
+</head>
+<body>
+  <div id="login-screen" class="login-wrap">
+    <div class="login-card">
+      <a class="brand" href="/" aria-label="GreatLearn home">
+        <span class="brand-mark">G</span>
+        <span>Great<span class="brand-light">Learn</span></span>
+      </a>
+      <div class="eyebrow">ADMINISTRATION PORTAL</div>
+      <h1>Welcome back.</h1>
+      <p class="muted">Sign in to manage course enrollments and admissions.</p>
+
+      <form id="login-form">
+        <label for="username">Username</label>
+        <input id="username" name="username" autocomplete="username"
+               required maxlength="100" placeholder="Admin username">
+
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password"
+               autocomplete="current-password" required
+               maxlength="200" placeholder="Your admin password">
+
+        <button class="primary-btn full-btn" type="submit" id="login-button">
+          Sign in to dashboard <span aria-hidden="true">→</span>
+        </button>
+        <p id="login-message" class="message" role="status"></p>
+      </form>
+      <a class="back-link" href="/">← Back to student website</a>
+    </div>
+    <p class="login-foot">GreatLearn · Course Enrollment Management</p>
+  </div>
+
+  <div id="dashboard-screen" class="app-shell" hidden>
+    <aside class="sidebar">
+      <a class="brand sidebar-brand" href="/">
+        <span class="brand-mark">G</span>
+        <span>Great<span class="brand-light">Learn</span></span>
+      </a>
+      <div class="side-label">WORKSPACE</div>
+      <a class="nav-link active" href="#overview"><span>▦</span> Overview</a>
+      <a class="nav-link" href="#registrations"><span>☷</span> Enrollments</a>
+      <div class="sidebar-bottom">
+        <div class="avatar">A</div>
+        <div class="admin-identity">
+          <strong>Administrator</strong>
+          <span>Portal management</span>
+        </div>
+        <button id="logout-button" class="logout-btn" title="Sign out"
+                aria-label="Sign out">↗</button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">GREATLEARN / ADMIN</div>
+          <h1>Admissions overview</h1>
+          <p class="muted">Monitor registrations and course demand.</p>
+        </div>
+        <button id="refresh-button" class="secondary-btn">↻ Refresh data</button>
+      </header>
+
+      <div id="dashboard-message" class="message" role="status"></div>
+
+      <section id="overview" class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-top"><span>Total admissions</span><span class="stat-icon purple">▤</span></div>
+          <div class="stat-number" id="total-count">—</div>
+          <div class="stat-note">All recorded enrollments</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-top"><span>Today's admissions</span><span class="stat-icon green">↗</span></div>
+          <div class="stat-number" id="today-count">—</div>
+          <div class="stat-note">Registrations today (database time)</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-top"><span>Available courses</span><span class="stat-icon orange">▣</span></div>
+          <div class="stat-number" id="course-count">—</div>
+          <div class="stat-note">Courses open for enrollment</div>
+        </article>
+      </section>
+
+      <section class="panel course-panel">
+        <div class="section-heading">
+          <div>
+            <h2>Course performance</h2>
+            <p class="muted">Enrollment distribution by course</p>
+          </div>
+          <span class="live-pill"><span></span> LIVE DATA</span>
+        </div>
+        <div id="course-chart" class="course-chart">
+          <p class="muted">Loading course statistics…</p>
+        </div>
+      </section>
+
+      <section id="registrations" class="panel records-panel">
+        <div class="section-heading records-heading">
+          <div>
+            <h2>Student enrollments</h2>
+            <p class="muted">Review and filter registration records.</p>
+          </div>
+          <span id="record-count" class="record-count">0 records</span>
+        </div>
+        <div class="filters">
+          <label class="search-box">
+            <span aria-hidden="true">⌕</span>
+            <input id="search-input" type="search"
+                   placeholder="Search name, email or phone…"
+                   maxlength="120">
+          </label>
+          <select id="course-filter" aria-label="Filter by course">
+            <option value="">All courses</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>STUDENT</th>
+                <th>CONTACT</th>
+                <th>COURSE</th>
+                <th>ENROLLED ON</th>
+                <th>ID</th>
+              </tr>
+            </thead>
+            <tbody id="enrollment-rows">
+              <tr><td colspan="5" class="empty-state">Loading enrollments…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-foot">
+          <span>Showing the latest matching records (up to 500).</span>
+          <button id="clear-filters" class="text-btn">Clear filters</button>
+        </div>
+      </section>
+
+      <footer class="page-footer">
+        <span>GreatLearn Admin</span>
+        <span>Keep student information confidential.</span>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
