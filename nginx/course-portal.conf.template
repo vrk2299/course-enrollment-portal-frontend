@@ -12,9 +12,6 @@ server {
     location / {
         try_files $uri $uri/ =404;
     }
-    location = /api/enrollments {
-        return 403;
-    }	
     # Forward API requests to the backend EC2
     location /api/ {
         proxy_pass http://__BACKEND_PRIVATE_IP__:8000;
